@@ -8,23 +8,14 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const { sequelize } = require('./db/db');
-const { User } = require('./db/models/user'); 
+const { Client } = require('./db/models/client'); 
 
 var app = express();
 
 async function startDB() {
   try {
     await sequelize.sync();
-/*      const newUser = await User.create({
-      name: 'Alice',
-      email: 'alice@example.com',
-      password: 'secret'
-    }); */
     console.log('Database synced');
-/*     const port = process.env.PORT || 4234;
-    app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
-    }); */
   } catch (error) {
     console.error('Unable to start server:', error);
   }
