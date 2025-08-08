@@ -1,10 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../db');
 
 class BaseModel extends Model {
   static fields() {
+    const modelName = this.name;
+    const modelId = `${modelName.charAt(0).toLowerCase()}${modelName.slice(1)}Id`;
+
     return {
-      id: {
+      [modelId]: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -12,7 +14,7 @@ class BaseModel extends Model {
     };
   }
 
-    static options({ sequelize, modelName, paranoid = false }) {
+  static options({ sequelize, modelName, paranoid = false }) {
     return {
       sequelize,
       modelName,

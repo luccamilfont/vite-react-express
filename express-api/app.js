@@ -9,6 +9,21 @@ var usersRouter = require('./routes/users');
 
 const { sequelize } = require('./db/db');
 const { Client } = require('./db/models/client'); 
+const { Order } = require('./db/models/order'); 
+const { Product } = require('./db/models/product'); 
+
+//associations
+const db = {};
+db.sequelize = sequelize;
+db.Client = Client;
+db.Order = Order;
+db.Product = Product;
+
+Object.keys(db).forEach(function (modelName) {
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db); 
+  }
+});
 
 var app = express();
 

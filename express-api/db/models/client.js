@@ -1,14 +1,14 @@
-const { Model, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { sequelize } = require('../db');
 const { BaseModel } = require('./basemodel'); 
 
 class Client extends BaseModel {}
 Client.init(
   {
-    ...BaseModel.fields(),
+    ...Client.fields(),
     name: DataTypes.STRING,
     phone_number: DataTypes.STRING,
   },
-  BaseModel.options({ sequelize, modelName: 'client', paranoid: true }) // includes timestamps
+  BaseModel.options({ sequelize, modelName: 'client', paranoid: true })
 );
 module.exports = { Client };
