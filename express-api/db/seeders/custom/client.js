@@ -1,9 +1,9 @@
-const { sequelize } = require('../db');
-const { Client } = require('../models/client');
+const db = require('../../models');
+const { sequelize, Client } = db;
 
 async function seed() {
   try {
-    await sequelize.sync(); // drops & recreates tables, use carefully
+    await sequelize.sync();
     await Client.create({
       name: 'John',
       phone_number: '912341234',

@@ -1,3 +1,5 @@
+'use strict';
+
 const { Model, DataTypes } = require('sequelize');
 
 class BaseModel extends Model {
@@ -23,4 +25,5 @@ class BaseModel extends Model {
     };
   }
 }
-module.exports = { BaseModel };
+
+module.exports = BaseModel;

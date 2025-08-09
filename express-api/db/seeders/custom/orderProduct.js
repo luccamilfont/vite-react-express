@@ -1,10 +1,9 @@
-const { sequelize } = require('../db');
-const { Order } = require('../models/order');
-const { Product } = require('../models/product');
+const db = require('../../models');
+const { sequelize, Order, Product } = db;
 
 async function seed() {
   try {
-    await sequelize.sync(); // drops & recreates tables
+    await sequelize.sync();
 
     const order = await Order.create({
       paid_at: new Date(),
@@ -16,7 +15,7 @@ async function seed() {
     });
 
     await sequelize.query(
-      `INSERT INTO order_product ("orderId", "productId", "createdAt", "updatedAt") VALUES (?, ?, datetime('now'), datetime('now'))`,
+      `INSERT INTO OrderProduct ("orderId", "productId", "createdAt", "updatedAt") VALUES (?, ?, datetime('now'), datetime('now'))`,
       {
         replacements: [order.orderId, product.productId],
       }

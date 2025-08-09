@@ -1,9 +1,9 @@
-const { sequelize } = require('../db');
-const { Product } = require('../models/product');
+const db = require('../../models');
+const { sequelize, Product } = db;
 
 async function seed() {
   try {
-    await sequelize.sync(); // drops & recreates tables, use carefully
+    await sequelize.sync();
     await Product.create({
       price: 18.99,
       name: 'Milk',

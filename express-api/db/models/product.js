@@ -1,22 +1,26 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../db');
-const { BaseModel } = require('./basemodel'); 
+'use strict';
 
-class Product extends BaseModel {}
-Product.init(
-  {
-    ...Product.fields(),
-    price: DataTypes.FLOAT,
-    name: DataTypes.STRING,
-  },
-  BaseModel.options({ sequelize, modelName: 'product', paranoid: true })
-);
+const BaseModel = require('./basemodel');
 
-Product.associate  = function (models) {
-   Product.belongsToMany(models.Order, {
-     through: 'order_product',
-     foreignKey: 'productId',
-     otherKey: 'orderId',
-   });
+module.exports = (sequelize, DataTypes) => {
+  class Product extends BaseModel {
+    static associate(models) {
+      Product.belongsToMany(models.Order, {
+        through: 'OrderProduct',
+        foreignKey: 'productId',
+        otherKey: 'orderId',
+      });
+    }
+  }
+
+  Product.init(
+    {
+      ...Product.fields(),
+      price: DataTypes.FLOAT,
+      name: DataTypes.STRING,
+    },
+    BaseModel.options({ sequelize, modelName: 'Product', paranoid: true })
+  );
+
+  return Product;
 };
-module.exports = { Product };

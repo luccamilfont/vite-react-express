@@ -1,9 +1,9 @@
-const { sequelize } = require('../db');
-const { Order } = require('../models/order');
+const db = require('../../models');
+const { sequelize, Order } = db;
 
 async function seed() {
   try {
-    await sequelize.sync(); // drops & recreates tables, use carefully
+    await sequelize.sync();
     await Order.create({
       paid_at: new Date(),
     });

@@ -1,14 +1,18 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../db');
-const { BaseModel } = require('./basemodel'); 
+'use strict';
 
-class Client extends BaseModel {}
-Client.init(
-  {
-    ...Client.fields(),
-    name: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-  },
-  BaseModel.options({ sequelize, modelName: 'client', paranoid: true })
-);
-module.exports = { Client };
+const BaseModel = require('./basemodel');
+
+module.exports = (sequelize, DataTypes) => {
+  class Client extends BaseModel {}
+
+  Client.init(
+    {
+      ...Client.fields(),
+      name: DataTypes.STRING,
+      phone_number: DataTypes.STRING,
+    },
+    BaseModel.options({ sequelize, modelName: 'Client', paranoid: true })
+  );
+
+  return Client;
+};
